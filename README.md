@@ -1,6 +1,6 @@
-# Route Planning Project Starter Code
+# Route Planning Project
 
-This is the starter code for the Route Planning project. Instructions for each exercise can be found in the `instructions` directory, and unit tests for some exercises in the `test` directory.
+This is a Route Planning project for Udacity C++ Nanodegree. This Route Planner uses A* algorithm to find the shortest path. It uses OpenStreet Map data for and io2d rendering library to display the route on a map. Instructions for each exercise can be found in the `instructions` directory, and unit tests for some exercises in the `test` directory.
 
 ## Cloning
 
