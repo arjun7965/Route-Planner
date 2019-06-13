@@ -17,6 +17,8 @@ class RouteModel : public Model {
         bool visited = false;
         std::vector<Node*> neighbors;
 
+        // returns the euclidean distance between the current node and the
+	// node passed in to the function
 	float distance (Node other) const {
             return std::sqrt(std::pow((x - other.x), 2) + std::pow((y - other.y), 2));
         }
@@ -36,7 +38,8 @@ class RouteModel : public Model {
     auto &GetNodeToRoadMap() { return node_to_road; }
     Node &FindClosestNode(float x, float y);
 
-    std::vector<Node> path; // This variable will store the path that is found by the A* search.
+    // This variable will store the path that is found by the A* search.
+    std::vector<Node> path;
 
   private:
     std::vector<Node> m_Nodes;
