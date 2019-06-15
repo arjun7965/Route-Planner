@@ -15,3 +15,22 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
     // find the closest nodes to (end_x, end_y)
     end_node = &m_Model.FindClosestNode(end_x, end_y);
 }
+
+// this method iterates from the end node to start node and returns the path
+// in reverse order. The rendering code expects the path to be in reverse order
+std::vector<RouteModel::Node> RoutePlaner::ConstructFinalPath(RouteModel::Node *current_node)
+{
+    std::vector<RouteModel::Node> path_found{};
+    distance = 0.0f;
+    RouteModel::Node parent_node;
+
+    while (current_node->parent != nullptr) {
+        path_found.push_back(*current_node);
+        parent_node = *(current_node->parent);
+        distance += current_node->distance(parent_node);
+        current_node = current_node->parent;
+    }
+    path_found.push_back(*current_node);
+    distance *= m_Model.MetricScale();
+    return path_found;
+}

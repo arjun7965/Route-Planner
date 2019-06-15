@@ -19,4 +19,6 @@ class RoutePlanner {
     // the distance variable holds the total distance for the route that A*
     // search finds from start_node to end_node
     float distance;
+
+    std::vector<RouteModel::Node> ConstructFinalPath(RouteModel::Node *current_node);
 };
