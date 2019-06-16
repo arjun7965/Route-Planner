@@ -45,3 +45,14 @@ float RoutePlanner::CalculateHValue(const RouteModel::Node *node)
 {
     return node->distance(*end_node);
 }
+
+RouteModel::Node *RoutePlanner::NextNode()
+{
+    std::sort(open_list.begin(), open_list.end(), [](const auto &first, const auto &second) {
+        return (first->h_value + first->g_value < second->h_value + second->g_value);
+    });
+
+    RouteModel::Node *lowest_fvalueNode = open_list.front();
+    open_list.erase(open_list.begin());
+    return lowest_fvalueNode;
+}
