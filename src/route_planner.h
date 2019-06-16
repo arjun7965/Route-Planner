@@ -11,6 +11,9 @@ class RoutePlanner {
     RoutePlanner(RouteModel &model, float start_x, float start_y, float end_x, float end_y);
     float GetDistance() const { return distance; }
 
+    // the A* search method
+    void AStarSearch();
+
   private:
     RouteModel &m_Model;
     RouteModel::Node *start_node;

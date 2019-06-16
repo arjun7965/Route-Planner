@@ -18,7 +18,7 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
 
 // this method iterates from the end node to start node and returns the path
 // in reverse order. The rendering code expects the path to be in reverse order
-std::vector<RouteModel::Node> RoutePlaner::ConstructFinalPath(RouteModel::Node *current_node)
+std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node)
 {
     std::vector<RouteModel::Node> path_found{};
     distance = 0.0f;
@@ -33,4 +33,10 @@ std::vector<RouteModel::Node> RoutePlaner::ConstructFinalPath(RouteModel::Node *
     path_found.push_back(*current_node);
     distance *= m_Model.MetricScale();
     return path_found;
+}
+
+void RoutePlanner::AStarSearch()
+{
+    end_node->parent = start_node;
+    m_Model.path = ConstructFinalPath(end_node);
 }
