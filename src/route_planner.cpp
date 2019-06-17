@@ -56,3 +56,18 @@ RouteModel::Node *RoutePlanner::NextNode()
     open_list.erase(open_list.begin());
     return lowest_fvalueNode;
 }
+
+void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
+{
+    current_node->FindNeighbors();          // add all unvisited neighbors to the open list
+
+    for (auto neighbor : current_node->neighbors) {
+        neighbor->parent = current_node;
+        neighbor->g_value = current_node->g_value + current_node->distance(*neighbor);
+        neighbor->h_value = CalculateHValue(neighbor);
+
+        // add the neighbor to the open list
+        open_list.push_back(neighbor);
+        neighbor->visited = true;            // mark the node as visited
+    }
+}
