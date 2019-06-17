@@ -41,6 +41,7 @@ void RoutePlanner::AStarSearch()
     m_Model.path = ConstructFinalPath(end_node);
 }
 
+// calculate Heuristic value from the current node to end node
 float RoutePlanner::CalculateHValue(const RouteModel::Node *node)
 {
     return node->distance(*end_node);
@@ -48,18 +49,23 @@ float RoutePlanner::CalculateHValue(const RouteModel::Node *node)
 
 RouteModel::Node *RoutePlanner::NextNode()
 {
+    // sort the open list vector in increasing order of f-value
     std::sort(open_list.begin(), open_list.end(), [](const auto &first, const auto &second) {
         return (first->h_value + first->g_value < second->h_value + second->g_value);
     });
 
     RouteModel::Node *lowest_fvalueNode = open_list.front();
+
+    // remove the first element of the vector as the first
+    // element is the node with the lowest f-value
     open_list.erase(open_list.begin());
     return lowest_fvalueNode;
 }
 
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
 {
-    current_node->FindNeighbors();          // add all unvisited neighbors to the open list
+    // add all unvisited neighbors to the open list
+    current_node->FindNeighbors();
 
     for (auto neighbor : current_node->neighbors) {
         neighbor->parent = current_node;
@@ -68,6 +74,8 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node)
 
         // add the neighbor to the open list
         open_list.push_back(neighbor);
-        neighbor->visited = true;            // mark the node as visited
+
+        // mark the node as visited
+        neighbor->visited = true;
     }
 }
