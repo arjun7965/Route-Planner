@@ -50,15 +50,25 @@ int main(int argc, const char **argv)
             osm_data = std::move(*data);
     }
     
-    // TODO: Declare floats `start_x`, `start_y`, `end_x`, and `end_y` and get
-    // user input for these values using std::cin. Pass the user input to the
-    // RoutePlanner object below.
+    // start and end node
+    float start_x, start_y, end_x, end_y;
+
+    // get the user input for start node: (start_x, start_y) and end node: (end_x, end_y)
+    std::cout << "The map coordinates start at (0,0) in the lower left corner and end at (100,100) ine the upper right corner."<<std::endl;
+    std::cout << "Enter a value for start x between 0-100: ";
+    std::cin >> start_x;
+    std::cout << "Enter a value for start y between 0-100: ";
+    std::cin >> start_y;
+    std::cout << "Enter a value for end x between 0-100: ";
+    std::cin >> end_x;
+    std::cout << "Enter a value for end y between 0-100: ";
+    std::cin >> end_y;
 
     // Build Model.
     RouteModel model{osm_data};
 
     // Perform search and render results.
-    RoutePlanner route_planner{model, 10, 10, 90, 90};
+    RoutePlanner route_planner{model, start_x, start_y, end_x, end_y};
     route_planner.AStarSearch();
 
     // printout the length of the path
