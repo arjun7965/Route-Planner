@@ -56,3 +56,10 @@ Exercises with tests will specify which string to pass with `-DTESTING`, but a t
 | Write the A\* Search Stub   |        "AStarStub"       |
 | Finish A\* Search           |       "AStarSearch"      |
 
+
+### Output
+
+After you compile the program, you can run the executables which are in the `bin` directory. The executable requires path to the OpenStreetMap XML file which is placed in the project folder as `map.osm`. 
+
+You need to enter start and end coordinates within 0-100. A sample output:
+![alt text](https://github.com/arjun7965/Route-Planner/blob/master/images/Output.png)
